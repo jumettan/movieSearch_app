@@ -27,7 +27,7 @@ function Home(){
         loadPopularMovies()
     },[])
 
-     const handleSearch = (e) => {
+     const handleSearch = async (e) => {
         e.preventDefault()
         if(!searchQuery.trim()) return
         if(loading) return
@@ -35,6 +35,8 @@ function Home(){
         setLoading(true)
         try{
             const searchResults = await searchMovies(searchQuery)
+            setMovies(searchResults)
+            setError(null)
         } catch(err){
             console.log(err)
             setError("FGailed to search movies...")
